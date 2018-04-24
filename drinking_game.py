@@ -5,7 +5,7 @@ print("""
 RULES OF THE GAME
 
 If you guess the number correctly drink for every guess you used
-and pass out a drink for each remaining guess you have left
+and pass out a drink for each remaining guess you have left.
 
 Guess the number on first try, everyone but you drinks 2x your max guesses.
 
@@ -20,10 +20,13 @@ reverse_flag = (True if secret_num == 3 or secret_num == 7 else False )
 max_guesses = 3
 guess_count = 0
 while guess_count < max_guesses:
+    remaining_guesses = max_guesses - guess_count
+
     # pluralize output message
     pluralization = ("" if max_guesses - guess_count == 1 else "es")
+
     # get a number guess from player
-    guess = int(input("{} remaining guess{}. Guess a number between 1 and 10: ".format(max_guesses - guess_count, pluralization)))
+    guess = int(input("{} remaining guess{}. Guess a number between 1 and 10: ".format(remaining_guesses, pluralization)))
 
     # compare guess to secret number
     if guess == secret_num:
@@ -33,8 +36,7 @@ while guess_count < max_guesses:
             sys.exit("First try! Everyone takes {}".format(max_guesses * 2))
 
         if reverse_flag:
-            sys.exit("Reverse, reverse! Take {} and pass out {} drink(s)".format(max_guesses - guess_count, guess_count))
-
+            sys.exit("Reverse, reverse! Take {} and pass out {} drink(s)".format(remaining_guesses, guess_count))
     elif guess > secret_num:
         print("Miss, guess lower!")
     elif guess < secret_num:
