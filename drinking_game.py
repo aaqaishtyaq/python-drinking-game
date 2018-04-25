@@ -1,7 +1,8 @@
 import random
 import sys
 
-print("""
+def show_rules():
+    print("""
 RULES OF THE GAME
 
 If you guess the number correctly drink for every guess you used
@@ -11,7 +12,14 @@ Guess the number on first try, everyone but you drinks 2x your max guesses.
 
 Guess the number correctly and it's a 3 or 7 reverse the order
 of dinks consumed and passed out.
+
+Type:
+    'help' to show these
+    'quit' to exit game
+    'restart' to restart
 """)
+
+show_rules()
 
 def game():
     # generate a random num between 1 and 10
@@ -34,7 +42,14 @@ def game():
             guess = int(guess)
             if guess < 1 or guess > 10: raise Exception
         except ValueError:
-            print("{} isn't a number!".format(guess))
+            if guess.lower() == "help":
+                show_rules()
+            elif guess.lower() == "quit":
+                sys.exit("Bye!")
+            elif guess.lower() == 'restart':
+                game()
+            else:
+                print("{} isn't a number!".format(guess))
         except Exception:
             print('Number out of range')
         else:
