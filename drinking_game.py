@@ -38,10 +38,9 @@ def game():
 
         try:
             # get a number guess from player
-            guess = input("{} remaining guess{}. Guess a number between 1 and 10: ".format(remaining_guesses, pluralization))
-            guess = int(guess)
-            if guess < 1 or guess > 10: raise Exception
-        except ValueError:
+            guess = int(input("{} remaining guess{}. Guess a number between 1 and 10: ".format(remaining_guesses, pluralization)))
+            if guess is not range(1, 11): raise Exception
+        except Exception:
             if guess.lower() == "help":
                 show_rules()
             elif guess.lower() == "quit":
@@ -81,7 +80,7 @@ def game():
                 else:
                     if guess > secret_num:
                         print("Miss, guess lower!")
-                    elif guess < secret_num:
+                    else:
                         print("Miss, guess higher!")
 
 
